@@ -1,0 +1,41 @@
+<html>
+  <head>
+    <script src="/js/webcomponents-bundle.js"></script>
+  </head>
+  <body>
+    <jr-glow>
+      <h1>Jaime Rodriguez</h1>
+    </jr-glow>
+  </body>
+  <script>
+    class JaimeRodriguezGlow extends HTMLElement {
+      constructor() {
+        super()
+        this.attachShadow({
+          mode: 'open'
+        })
+      }
+
+      connectedCallback() {
+        let template = document.createElement('template')
+        template.innerHTML = '<style>:host { display: inline-block }</style><slot />'
+        this.shadowRoot
+          .appendChild(
+            template.content.cloneNode(true))
+        this.animate([
+          { textShadow: '0 0 5px #008844' },
+          { textShadow: '0 0 7px #008844' },
+          { textShadow: '0 0 10px #008844' },
+          { textShadow: '0 0 5px #008844' },
+        ], {
+          duration: 1000,
+          //easing: 'cubic-bezier(0, 0.6, 0.3, 1)',
+          fill:'backwards',
+          iterations: Infinity
+        })
+      }
+    }
+
+    customElements.define('jr-glow', JaimeRodriguezGlow)
+  </script>
+</html>
